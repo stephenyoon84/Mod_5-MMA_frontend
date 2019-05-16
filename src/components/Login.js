@@ -3,6 +3,7 @@ import {Button, Divider, Form, Grid, Segment} from 'semantic-ui-react';
 import {Link, Redirect} from 'react-router-dom';
 import {connect} from 'react-redux'
 import {URL} from '../redux/actionCreators'
+import {LOGIN} from '../redux/actionType'
 
 class Login extends Component {
   submitHandler = e => {
@@ -29,9 +30,12 @@ class Login extends Component {
   }
 
   handleResponse = json => {
+    // debugger
     if (json["success"]) {
       localStorage.setItem("token", json["token"])
-      return <Redirect to='/' />
+      this.props.dispatch({type: LOGIN, payload: json["user"]})
+      //dispatch props user to user from json
+      // return <Redirect to='/' />
       // not yet connected to store
       //set store state user to user
     } else {
@@ -65,7 +69,7 @@ class Login extends Component {
 }
 
 const mapStateToProps = (store) => ({
-  value: store.login
+  user: store.user
 })
 
 export default connect(mapStateToProps)(Login)

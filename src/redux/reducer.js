@@ -1,21 +1,36 @@
 import {combineReducers} from 'redux';
-import {LOGIN} from './actionType';
+import {LOGIN, LOGOUT} from './actionType';
 
-const currentUserReducer = (oldState={}, action) => {
+// const currentUserReducer = (oldState={}, action) => {
+//   switch(action.type){
+//     case LOGIN:
+//       return
+//     default:
+//       return oldState
+//   }
+// }
+
+
+
+
+
+// const rootReducer = combineReducers({
+//   login: currentUserReducer
+// })
+
+// export default rootReducer
+const initialState = {
+  user: null
+}
+const reducer = (oldState=initialState, action) => {
   switch(action.type){
     case LOGIN:
-      return
+      return {...oldState, user: action.payload}
+    case LOGOUT:
+      return {...oldState, user: action.payload}
     default:
       return oldState
   }
 }
 
-
-
-
-
-const rootReducer = combineReducers({
-  login: currentUserReducer
-})
-
-export default rootReducer
+export default reducer

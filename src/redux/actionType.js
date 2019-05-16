@@ -1,7 +1,8 @@
 const LOGIN = "LOGIN"
+const LOGOUT = "LOGOUT"
 
 
 
 
 
-export {LOGIN}
+export {LOGIN, LOGOUT}

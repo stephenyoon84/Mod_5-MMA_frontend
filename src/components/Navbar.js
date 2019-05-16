@@ -1,6 +1,8 @@
 import React, {Component, Fragment} from 'react';
 import {Link, Redirect} from 'react-router-dom';
 import {Menu} from 'semantic-ui-react';
+import {connect} from 'react-redux';
+import {LOGOUT} from '../redux/actionType'
 
 class Navbar extends Component {
 
@@ -16,6 +18,7 @@ class Navbar extends Component {
           { !!localStorage.token ? (
             <Menu.Item name="LogOut" className='right' onClick={() => {
                 localStorage.clear()
+                this.props.dispatch({type: LOGOUT, payload: null})
               }}>Log Out</Menu.Item>
           ) : (
             <Menu.Item name="LogIn" className='right' ><Link to="/login">Log In</Link></Menu.Item>
@@ -26,4 +29,8 @@ class Navbar extends Component {
   }
 }
 
-export default Navbar
+const mapStateToProps = (store) => {
+  return {user: store.user}
+}
+
+export default connect(mapStateToProps)(Navbar)

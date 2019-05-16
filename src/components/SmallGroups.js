@@ -14,12 +14,12 @@ class SmallGroups extends Component {
           <tr>
             <td>aa</td>
             <td>M</td>
-            <td>30</td>
+            <td>35</td>
           </tr>
           <tr>
             <td>bb</td>
             <td>F</td>
-            <td>26</td>
+            <td>31</td>
           </tr>
         </table>
       </div>

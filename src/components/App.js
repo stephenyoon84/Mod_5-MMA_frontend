@@ -8,6 +8,7 @@ import Navbar from './Navbar';
 import NewMemberForm from './NewMemberForm';
 import Members from './Members'
 import SmallGroups from './SmallGroups'
+import Welcome from './Welcome'
 
 class App extends Component {
 
@@ -16,7 +17,8 @@ class App extends Component {
       <div className="App">
         <Navbar />
         <Switch>
-          <Route exact path="/login" component={Login} />
+          <Route exact path='/' component={Welcome} />
+          <Route path="/login" component={Login} />
           <Route path='/newmember' component={NewMemberForm} />
           <Route path='/members' component={Members} />
           <Route path='/smallgroups' component={SmallGroups} />
