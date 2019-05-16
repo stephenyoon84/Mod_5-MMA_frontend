@@ -8,11 +8,14 @@ class Navbar extends Component {
     return (
       <Menu>
         <Menu.Item name='Home'><Link to='/'>Home</Link></Menu.Item>
+        <Menu.Item name='NewForm'><Link to='/newmember' >New Member</Link></Menu.Item>
+        <Menu.Item name='AllMembers'><Link to='/members'>All Members</Link></Menu.Item>
+        <Menu.Item name='SmallGroups'><Link to='/smallgroups'>Small Groups</Link></Menu.Item>
+        <Menu.Item name='Orientation'><Link to='/orientation'>Orientation(optional)</Link></Menu.Item>
         <Fragment>
           { !!localStorage.token ? (
             <Menu.Item name="LogOut" className='right' onClick={() => {
                 localStorage.clear()
-                return <Redirect to='/' />
               }}>Log Out</Menu.Item>
           ) : (
             <Menu.Item name="LogIn" className='right' ><Link to="/login">Log In</Link></Menu.Item>

@@ -1,12 +1,14 @@
 import React, {Component} from 'react';
 import {Button, Divider, Form, Grid, Segment} from 'semantic-ui-react';
 import {Link, Redirect} from 'react-router-dom';
+import {connect} from 'react-redux'
 import {URL} from '../redux/actionCreators'
 
-export default class Login extends Component {
+class Login extends Component {
   submitHandler = e => {
     // debugger
     e.preventDefault()
+    console.log(e)
     let email = e.target.email.value
     let password = e.target.password.value
     // console.log(email, password, URL)
@@ -27,11 +29,9 @@ export default class Login extends Component {
   }
 
   handleResponse = json => {
-    debugger
-    console.log(json)
     if (json["success"]) {
       localStorage.setItem("token", json["token"])
-      // return <Redirect to='/' />
+      return <Redirect to='/' />
       // not yet connected to store
       //set store state user to user
     } else {
@@ -50,7 +50,7 @@ export default class Login extends Component {
               <Form onSubmit={this.submitHandler} >
                 <Form.Input icon="mail" iconPosition="left" label="Email" placeholder="Email" name="email" />
                 <Form.Input icon="lock" iconPosition="left" label="Password" type="password" placeholder="Password" name="password" />
-                <Button content="Login" primary />
+                <Form.Button type="submit" content="Login" primary/>
               </Form>
             </Grid.Column>
             <Grid.Column verticalAlign="middle">
@@ -63,3 +63,9 @@ export default class Login extends Component {
     }
   }
 }
+
+const mapStateToProps = (store) => ({
+  value: store.login
+})
+
+export default connect(mapStateToProps)(Login)

@@ -1,7 +1,7 @@
-const CHANGING_SEARCH_TEXT = "CHANGING_SEARCH_TEXT"
+const LOGIN = "LOGIN"
 
 
 
 
 
-export {CHANGING_SEARCH_TEXT}
+export {LOGIN}
