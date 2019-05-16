@@ -3,6 +3,7 @@ import {Link, Redirect, withRouter} from 'react-router-dom';
 import {Menu} from 'semantic-ui-react';
 import {connect} from 'react-redux';
 import {LOGOUT} from '../redux/actionType'
+import {logoutUser} from '../redux/actionCreators'
 
 class Navbar extends Component {
 
@@ -19,7 +20,7 @@ class Navbar extends Component {
               <Menu.Item name='Orientation'><Link to='/orientation'>Orientation(optional)</Link></Menu.Item>
               <Menu.Item name="LogOut" className='right' onClick={() => {
                   localStorage.clear()
-                  this.props.dispatch({type: LOGOUT, payload: null})
+                  this.props.logoutUser()
                 }}>Log Out</Menu.Item>
               </>
           ) : (
@@ -35,4 +36,4 @@ const mapStateToProps = (store) => {
   return {user: store.user}
 }
 
-export default withRouter(connect(mapStateToProps)(Navbar))
+export default withRouter(connect(mapStateToProps, {logoutUser})(Navbar))

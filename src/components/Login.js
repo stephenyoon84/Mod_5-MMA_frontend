@@ -7,12 +7,10 @@ import {LOGIN} from '../redux/actionType'
 
 class Login extends Component {
   submitHandler = e => {
-    // debugger
     e.preventDefault()
     console.log(e)
     let email = e.target.email.value
     let password = e.target.password.value
-    // console.log(email, password, URL)
     fetch(URL + '/login', {
       method: 'POST',
       headers: {
@@ -24,20 +22,13 @@ class Login extends Component {
         password: password
       })
     }).then(r => r.json())
-      // .then(console.log)
       .then(this.handleResponse)
-      // debugger
   }
 
   handleResponse = json => {
-    // debugger
     if (json["success"]) {
       localStorage.setItem("token", json["token"])
-      this.props.dispatch(loginUser(json["user"]))
-      //dispatch props user to user from json
-      // return <Redirect to='/' />
-      // not yet connected to store
-      //set store state user to user
+      this.props.loginUser(json["user"])
     } else {
       console.log("Error")
     }
@@ -72,4 +63,4 @@ const mapStateToProps = (store) => ({
   user: store.user
 })
 
-export default connect(mapStateToProps)(Login)
+export default connect(mapStateToProps, {loginUser})(Login)
