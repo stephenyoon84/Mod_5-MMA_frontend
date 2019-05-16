@@ -1,4 +1,4 @@
-import {} from './actionType';
+import {LOGIN, LOGOUT} from './actionType';
 
 const URL = 'http://localhost:3001/api/v1'
 
@@ -6,4 +6,12 @@ const URL = 'http://localhost:3001/api/v1'
 //   return {type: CHANGING_SEARCH_TEXT, payload: searchText}
 // }
 
-export {URL}
+function loginUser(currentUser){
+  return {type: LOGIN, payload: currentUser}
+}
+
+function logoutUser(){
+  return {type: LOGOUT, payload: null}
+}
+
+export {URL, loginUser, logoutUser}

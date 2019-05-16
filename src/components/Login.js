@@ -2,7 +2,7 @@ import React, {Component} from 'react';
 import {Button, Divider, Form, Grid, Segment} from 'semantic-ui-react';
 import {Link, Redirect} from 'react-router-dom';
 import {connect} from 'react-redux'
-import {URL} from '../redux/actionCreators'
+import {URL, loginUser} from '../redux/actionCreators'
 import {LOGIN} from '../redux/actionType'
 
 class Login extends Component {
@@ -33,7 +33,7 @@ class Login extends Component {
     // debugger
     if (json["success"]) {
       localStorage.setItem("token", json["token"])
-      this.props.dispatch({type: LOGIN, payload: json["user"]})
+      this.props.dispatch(loginUser(json["user"]))
       //dispatch props user to user from json
       // return <Redirect to='/' />
       // not yet connected to store

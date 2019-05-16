@@ -1,5 +1,5 @@
 import React, {Component, Fragment} from 'react';
-import {Link, Redirect} from 'react-router-dom';
+import {Link, Redirect, withRouter} from 'react-router-dom';
 import {Menu} from 'semantic-ui-react';
 import {connect} from 'react-redux';
 import {LOGOUT} from '../redux/actionType'
@@ -35,4 +35,4 @@ const mapStateToProps = (store) => {
   return {user: store.user}
 }
 
-export default connect(mapStateToProps)(Navbar)
+export default withRouter(connect(mapStateToProps)(Navbar))
