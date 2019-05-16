@@ -1,13 +1,18 @@
 import React, {Component} from 'react';
+import {connect} from 'react-redux';
 
 class Welcome extends Component {
   render() {
-    if (!!localStorage.token) {
-      return <div>Welcome name</div>
+    if (!!this.props.user) {
+      return <h1>Welcome {this.props.user.name}</h1>
     } else {
-      return <div>Welcome to UMC</div>
+      return <h1>Welcome to UMC</h1>
     }
   }
 }
 
-export default Welcome
+const mapStateToProps = (store) => ({
+  user: store.user
+})
+
+export default connect(mapStateToProps)(Welcome)
