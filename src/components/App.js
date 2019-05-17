@@ -9,8 +9,34 @@ import NewMemberForm from './NewMemberForm';
 import Members from './Members'
 import SmallGroups from './SmallGroups'
 import Welcome from './Welcome'
+import {URL, loginUser} from '../redux/actionCreators'
+import {LOGIN} from '../redux/actionType'
 
 class App extends Component {
+
+  componentDidMount(){
+    let token = localStorage.getItem('token')
+    if (!!localStorage.token){
+      fetch(URL+'/current_user', {
+        method: 'GET',
+        headers: {
+          "Content-Type": "application/json",
+          "Accept": "application/json",
+          "Authorization": `Bearer ${token}`
+        }
+      })
+        .then(r => r.json())
+        .then(this.handleResponse)
+    }
+  }
+
+  handleResponse = json => {
+    if (json["success"]) {
+      this.props.loginUser(json["user"])
+    } else {
+      console.log("Error")
+    }
+  }
 
   render() {
     return (
@@ -28,4 +54,8 @@ class App extends Component {
   }
 }
 
-export default App;
+const mapStateToProps = (store) => ({
+  user: store.user
+})
+
+export default connect(mapStateToProps, {loginUser})(App);
