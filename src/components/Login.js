@@ -2,7 +2,7 @@ import React, {Component} from 'react';
 import {Button, Divider, Form, Grid, Segment} from 'semantic-ui-react';
 import {Link, Redirect} from 'react-router-dom';
 import {connect} from 'react-redux'
-import {URL, loginUser} from '../redux/actionCreators'
+import {URL, loginUser, fetchingMembers} from '../redux/actionCreators'
 
 class Login extends Component {
   submitHandler = e => {
@@ -28,6 +28,7 @@ class Login extends Component {
     if (json["success"]) {
       localStorage.setItem("token", json["token"])
       this.props.loginUser(json["user"])
+      this.props.fetchingMembers()
     } else {
       console.log("Error")
     }
@@ -62,4 +63,4 @@ const mapStateToProps = (store) => ({
   user: store.user
 })
 
-export default connect(mapStateToProps, {loginUser})(Login)
+export default connect(mapStateToProps, {loginUser, fetchingMembers})(Login)

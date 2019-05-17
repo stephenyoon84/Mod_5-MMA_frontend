@@ -2,7 +2,7 @@ import React, {Component, Fragment} from 'react';
 import {Link, withRouter} from 'react-router-dom';
 import {Menu} from 'semantic-ui-react';
 import {connect} from 'react-redux';
-import {logoutUser} from '../redux/actionCreators'
+import {logoutUser, clearMembers} from '../redux/actionCreators'
 
 class Navbar extends Component {
 
@@ -20,6 +20,7 @@ class Navbar extends Component {
               <Menu.Item name="LogOut" className='right' onClick={() => {
                   localStorage.clear()
                   this.props.logoutUser()
+                  this.props.clearMembers()
                 }}>Log Out</Menu.Item>
               </>
           ) : (
@@ -35,4 +36,4 @@ const mapStateToProps = (store) => {
   return {user: store.user}
 }
 
-export default withRouter(connect(mapStateToProps, {logoutUser})(Navbar))
+export default withRouter(connect(mapStateToProps, {logoutUser, clearMembers})(Navbar))

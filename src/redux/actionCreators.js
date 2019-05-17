@@ -1,4 +1,4 @@
-import {LOGIN, LOGOUT} from './actionType';
+import {LOGIN, LOGOUT, FETCHED_MEMBERS, CLEAR_MEMBERS} from './actionType';
 
 const URL = 'http://localhost:3001/api/v1'
 
@@ -10,4 +10,22 @@ function logoutUser(){
   return {type: LOGOUT, payload: null}
 }
 
-export {URL, loginUser, logoutUser}
+function fetchedMembers(membersArray){
+  return {type: FETCHED_MEMBERS, payload: membersArray}
+}
+
+function fetchingMembers() {
+  return (dispatch) => {
+    fetch(URL + '/members')
+      .then(r => r.json())
+      .then(membersArray => {
+        dispatch(fetchedMembers(membersArray))
+      })
+  }
+}
+
+function clearMembers() {
+  return {type: CLEAR_MEMBERS, payload: []}
+}
+
+export {URL, loginUser, logoutUser,fetchedMembers, fetchingMembers, clearMembers}

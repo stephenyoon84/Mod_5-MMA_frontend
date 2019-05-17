@@ -9,7 +9,7 @@ import Members from './Members'
 import SmallGroups from './SmallGroups'
 import Welcome from './Welcome'
 import Signup from './Signup'
-import {URL, loginUser} from '../redux/actionCreators'
+import {URL, loginUser, fetchingMembers} from '../redux/actionCreators'
 
 class App extends Component {
 
@@ -32,6 +32,7 @@ class App extends Component {
   handleResponse = json => {
     if (json["success"]) {
       this.props.loginUser(json["user"])
+      this.props.fetchingMembers()
     } else {
       console.log("Error")
     }
@@ -58,4 +59,10 @@ const mapStateToProps = (store) => ({
   user: store.user
 })
 
-export default connect(mapStateToProps, {loginUser})(App);
+// const mapDispatchToProps = (dispatch) => ({
+//   fetchingMembers: () => {dispatch(fetchingMembers())},
+//   loginUser: (user) => {dispatch(loginUser(user))}
+// })
+
+// export default connect(mapStateToProps, mapDispatchToProps)(App);
+export default connect(mapStateToProps, {loginUser, fetchingMembers})(App);

@@ -1,10 +1,13 @@
 import React, {Component} from 'react';
+import {Redirect} from 'react-router-dom';
+import {connect} from 'react-redux';
 
 class Members extends Component {
   render() {
-    return (
-      <div>
-        <div>All members will be shown here (fetch members & users)</div>
+    if (!localStorage.token) {
+      return <Redirect to='/' />
+    } else {
+      return (
         <table>
           <thead>
             <tr>
@@ -20,33 +23,32 @@ class Members extends Component {
             </tr>
           </thead>
           <tbody>
-            <tr>
-              <th>May 16, 2019</th>
-              <th>AA</th>
-              <th>aa@aa.com</th>
-              <th>1111111111</th>
-              <th>M</th>
-              <th>March 31, 1984</th>
-              <th>Yes</th>
-              <th>Came with BB</th>
-              <th>Not yet</th>
-            </tr>
-            <tr>
-              <th>May 16, 2019</th>
-              <th>BB</th>
-              <th>bb@bb.com</th>
-              <th>1231231234</th>
-              <th>F</th>
-              <th>May 2, 1988</th>
-              <th>Yes</th>
-              <th>Came with AA</th>
-              <th>Not yet</th>
-            </tr>
+            {
+              this.props.members.map((member) => {
+                return (
+                  <tr key={member.id}>
+                    <th>{member.register_date}</th>
+                    <th>{member.name}</th>
+                    <th>{member.email}</th>
+                    <th>{member.phone_number}</th>
+                    <th>{member.gender}</th>
+                    <th>{member.dob}</th>
+                    <th>{member.active ? "Yes" : "No"}</th>
+                    <th>{member.info}</th>
+                    <th>{member.welcome_mail ? "Yes" : "Not yet"}</th>
+                  </tr>
+                )
+              })
+            }
           </tbody>
         </table>
-      </div>
-    )
+      )
+    }
   }
 }
 
-export default Members
+const mapStateToProps = (store) => ({
+  members: store.members
+})
+
+export default connect(mapStateToProps)(Members);
