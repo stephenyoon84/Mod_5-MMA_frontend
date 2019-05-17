@@ -3,7 +3,6 @@ import {Button, Divider, Form, Grid, Segment} from 'semantic-ui-react';
 import {Link, Redirect} from 'react-router-dom';
 import {connect} from 'react-redux'
 import {URL, loginUser} from '../redux/actionCreators'
-import {LOGIN} from '../redux/actionType'
 
 class Login extends Component {
   submitHandler = e => {

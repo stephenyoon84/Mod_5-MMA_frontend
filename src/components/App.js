@@ -1,7 +1,6 @@
 import React, {Component} from 'react';
-import {Route, Switch, withRouter, Link} from 'react-router-dom';
+import {Route, Switch} from 'react-router-dom';
 import {connect} from 'react-redux';
-import logo from '../logo.svg';
 import '../App.css';
 import Login from './Login';
 import Navbar from './Navbar';
@@ -9,8 +8,8 @@ import NewMemberForm from './NewMemberForm';
 import Members from './Members'
 import SmallGroups from './SmallGroups'
 import Welcome from './Welcome'
+import Signup from './Signup'
 import {URL, loginUser} from '../redux/actionCreators'
-import {LOGIN} from '../redux/actionType'
 
 class App extends Component {
 
@@ -48,6 +47,7 @@ class App extends Component {
           <Route path='/newmember' component={NewMemberForm} />
           <Route path='/members' component={Members} />
           <Route path='/smallgroups' component={SmallGroups} />
+          <Route path='/signup' component={Signup} />
         </Switch>
       </div>
     );

@@ -1,8 +1,7 @@
 import React, {Component, Fragment} from 'react';
-import {Link, Redirect, withRouter} from 'react-router-dom';
+import {Link, withRouter} from 'react-router-dom';
 import {Menu} from 'semantic-ui-react';
 import {connect} from 'react-redux';
-import {LOGOUT} from '../redux/actionType'
 import {logoutUser} from '../redux/actionCreators'
 
 class Navbar extends Component {
