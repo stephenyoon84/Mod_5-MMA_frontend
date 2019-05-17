@@ -2,7 +2,7 @@ import React, {Component} from 'react';
 import {Button, Form, Grid, Segment} from 'semantic-ui-react';
 import {Redirect} from 'react-router-dom';
 import {connect} from 'react-redux';
-import {URL, loginUser} from '../redux/actionCreators'
+import {URL, loginUser, fetchingMembers} from '../redux/actionCreators'
 
 const genderOptions = [
   {key: 'M', text: 'Male', value: "M" },
@@ -15,6 +15,7 @@ class Signup extends Component {
   }
 
   handleSubmit = (e) => {
+    // debugger
     let name = e.target.name.value
     let email = e.target.email.value
     let phone_number = e.target.phoneNumber.value
@@ -42,13 +43,14 @@ class Signup extends Component {
     if (json["success"]) {
       localStorage.setItem('token', json['token'])
       this.props.loginUser(json["user"])
+      this.props.fetchingMembers()
     } else {
       console.log("Error")
     }
   }
 
-  genderChange = (e) => {
-    this.setState({gender: e.target.innerText})
+  genderChange = (e, d) => {
+    this.setState({gender: d.value})
   }
 
   // params.require(:user).permit(:name, :email, :phone_number, :gender, :dob, :register_date, :active, :info, :user_type, :password, :password_confirmation)
@@ -85,4 +87,4 @@ const mapStateToProps = (store) => ({
   user: store.user
 })
 
-export default connect(mapStateToProps, {loginUser})(Signup)
+export default connect(mapStateToProps, {loginUser, fetchingMembers})(Signup)

@@ -36,6 +36,7 @@ class Members extends Component {
                     <th>{member.active ? "Yes" : "No"}</th>
                     <th>{member.info}</th>
                     <th>{member.welcome_mail ? "Yes" : "Not yet"}</th>
+                    <th><button>Edit</button></th>
                   </tr>
                 )
               })
