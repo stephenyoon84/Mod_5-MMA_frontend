@@ -2,12 +2,7 @@ import React, {Component} from 'react';
 import {Button, Form, Grid, Segment} from 'semantic-ui-react';
 import {Redirect} from 'react-router-dom';
 import {connect} from 'react-redux';
-import {URL, loginUser, fetchingMembers} from '../redux/actionCreators'
-
-const genderOptions = [
-  {key: 'M', text: 'Male', value: "M" },
-  {key: 'F', text: 'Female', value: "F" }
-]
+import {URL, loginUser, fetchingMembers, genderOptions} from '../redux/actionCreators'
 
 class Signup extends Component {
   state = {
@@ -24,7 +19,6 @@ class Signup extends Component {
     let password = e.target.password.value
     let password_confirmation = e.target.password_confirmation.value
     let user = {name: name, email: email, phone_number: phone_number, gender: gender, dob: dob, password: password, password_confirmation: password_confirmation}
-    console.log(user)
     fetch(URL + '/signup', {
       method: 'POST',
       headers: {
