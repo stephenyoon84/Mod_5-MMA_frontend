@@ -1,12 +1,12 @@
 import React, {Component, Fragment} from 'react';
 import {connect} from 'react-redux';
 import {Button, Form, Grid, Segment} from 'semantic-ui-react';
-import {URL, genderOptions, fetchingMembers, activeOptions} from '../redux/actionCreators';
+import {URL, genderOptions, fetchingMembers, activeOptions, fetchingGroups} from '../redux/actionCreators';
 
 class NewMemberForm extends Component {
   state = {
-    gender: "",
-    active: null,
+    // gender: "",
+    // active: null,
   }
 
   // componentDidMount(){
@@ -82,8 +82,9 @@ class NewMemberForm extends Component {
     let dob = e.target.parentElement.dob.value
     let info = e.target.parentElement.info.value
     let active = this.state.active
+    let group = this.state.groups
     let memberid = parseInt(window.location.pathname.split('/')[2])
-    let update_member = {id: memberid, name: name, email: email, phone_number: phone_number, gender: gender, dob: dob, info: info, active: active}
+    let update_member = {id: memberid, name: name, email: email, phone_number: phone_number, gender: gender, dob: dob, info: info, active: active, group: group}
     e.target.parentElement.name.value = ""
     e.target.parentElement.email.value = ""
     e.target.parentElement.phoneNumber.value = ""
@@ -110,8 +111,19 @@ class NewMemberForm extends Component {
   handleResponseUpdate = json => {
     if (json["success"]) {
       this.props.fetchingMembers()
+      this.props.fetchingGroups()
       alert("Update success")
     }
+  }
+
+  groupOptions = () => {
+    return this.props.groups.map(g => {
+      return {key: g.name, text: g.name, value: g.name}
+    })
+  }
+
+  groupChange = (e, d) => {
+    this.setState({groups: d.value})
   }
 
   render() {
@@ -145,6 +157,7 @@ class NewMemberForm extends Component {
                   ) : (
                     <Fragment>
                       <Form.Select label="Active?" options={activeOptions} placeholder="Active?" name="active" onChange={this.activeChange} defaultValue={(target === undefined || isNaN(memberid)) ? ("") : (this.state.active ? "Yes" : "No")}/>
+                      <Form.Select label="Group" options={this.groupOptions()} name="group" onChange={this.groupChange} />
                     </Fragment>
                   )
                 }
@@ -166,7 +179,8 @@ class NewMemberForm extends Component {
 }
 
 const mapStateToProps = (store) => ({
-  members: store.members
+  members: store.members,
+  groups: store.groups.filter(g => g.year === new Date().getFullYear())
 })
 
-export default connect(mapStateToProps, {fetchingMembers})(NewMemberForm)
+export default connect(mapStateToProps, {fetchingMembers, fetchingGroups})(NewMemberForm)

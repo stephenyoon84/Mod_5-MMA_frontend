@@ -38,6 +38,7 @@ class Signup extends Component {
       localStorage.setItem('token', json['token'])
       this.props.loginUser(json["user"])
       this.props.fetchingMembers()
+      this.props.fetchingGroups()
     } else {
       console.log("Error")
     }

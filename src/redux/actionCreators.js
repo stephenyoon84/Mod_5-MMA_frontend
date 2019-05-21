@@ -3,8 +3,8 @@ import {LOGIN, LOGOUT, FETCHED_MEMBERS, CLEAR_MEMBERS, FETCHED_GROUPS, CLEAR_GRO
 const URL = 'http://localhost:3001/api/v1'
 
 const genderOptions = [
-  {key: 'M', text: 'Male', value: "M" },
-  {key: 'F', text: 'Female', value: "F" }
+  {key: 'M', text: 'M', value: "M" },
+  {key: 'F', text: 'F', value: "F" }
 ]
 
 const activeOptions = [
