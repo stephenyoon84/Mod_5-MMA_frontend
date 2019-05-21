@@ -1,5 +1,5 @@
 import {combineReducers} from 'redux';
-import {LOGIN, LOGOUT, FETCHED_MEMBERS, CLEAR_MEMBERS} from './actionType';
+import {LOGIN, LOGOUT, FETCHED_MEMBERS, CLEAR_MEMBERS, FETCHED_GROUPS, CLEAR_GROUPS} from './actionType';
 
 const currentUserReducer = (oldState=null, action) => {
   switch(action.type){
@@ -23,9 +23,21 @@ const membersReducer = (oldState=[], action) => {
   }
 }
 
+const groupsReducer = (oldState=[], action) => {
+  switch(action.type){
+    case FETCHED_GROUPS:
+      return action.payload
+    case CLEAR_GROUPS:
+      return action.payload
+    default:
+      return oldState
+  }
+}
+
 const rootReducer = combineReducers({
   user: currentUserReducer,
-  members: membersReducer
+  members: membersReducer,
+  groups: groupsReducer
 })
 
 export default rootReducer

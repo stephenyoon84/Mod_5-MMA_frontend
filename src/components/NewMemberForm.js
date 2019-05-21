@@ -9,23 +9,25 @@ class NewMemberForm extends Component {
     active: null,
   }
 
-  componentDidMount(){
-    let memberid = parseInt(window.location.pathname.split('/')[2])
-    if (memberid) {
-      const target = this.props.members.find(m => m.id === memberid)
-      // console.log(target)
-      // console.log(memberid)
-      this.setState({
-        gender: target.gender,
-        active: target.active,
-        welcome_mail: target.welcome_mail,
-        memberid: memberid
-      })
-    } else {
-      console.log("new")
-    }
-  }
-
+  // componentDidMount(){
+  //   let memberid = parseInt(window.location.pathname.split('/')[2])
+  //   if (memberid) {
+  //     const target = this.props.members.find(m => m.id === memberid)
+  //     // console.log(target)
+  //     // console.log(memberid)
+  //     if (!!target) {
+  //       this.setState({
+  //         gender: target.gender,
+  //         active: target.active,
+  //         welcome_mail: target.welcome_mail,
+  //         memberid: memberid
+  //       })
+  //     }
+  //   } else {
+  //     console.log("new")
+  //   }
+  // }
+  //
   genderChange = (e, d) => {
     this.setState({gender: d.value})
   }
@@ -142,7 +144,7 @@ class NewMemberForm extends Component {
                     null
                   ) : (
                     <Fragment>
-                      <Form.Select label="Active?" options={activeOptions} placeholder="Active?" name="active" onChange={this.activeChange} defaultValue={(target === undefined || isNaN(memberid)) ? ("") : (target.active ? "Yes" : "No")}/>
+                      <Form.Select label="Active?" options={activeOptions} placeholder="Active?" name="active" onChange={this.activeChange} defaultValue={(target === undefined || isNaN(memberid)) ? ("") : (this.state.active ? "Yes" : "No")}/>
                     </Fragment>
                   )
                 }
