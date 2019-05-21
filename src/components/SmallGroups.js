@@ -29,6 +29,11 @@ class SmallGroups extends Component {
                     </tr>
                   </thead>
                   <tbody>
+                    <tr bgcolor="yellow">
+                      <td>{group.leader.leader_name}</td>
+                      <td>{group.leader.leader_gender}</td>
+                      <td>{thisYear - parseInt(group.leader.leader_dob.split('-')[0])}</td>
+                    </tr>
                     {
                       group.allmembers.map((member) => {
                         return (
