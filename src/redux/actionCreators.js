@@ -7,6 +7,11 @@ const genderOptions = [
   {key: 'F', text: 'Female', value: "F" }
 ]
 
+const activeOptions = [
+  {key: 'Yes', text: 'Yes', value: true},
+  {key: 'No', text: 'No', value: false}
+]
+
 function loginUser(user){
   return {type: LOGIN, payload: user}
 }
@@ -33,4 +38,4 @@ function clearMembers() {
   return {type: CLEAR_MEMBERS, payload: []}
 }
 
-export {URL, loginUser, logoutUser,fetchedMembers, fetchingMembers, clearMembers, genderOptions}
+export {URL, loginUser, logoutUser,fetchedMembers, fetchingMembers, clearMembers, genderOptions, activeOptions}

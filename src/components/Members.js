@@ -1,5 +1,5 @@
 import React, {Component} from 'react';
-import {Redirect} from 'react-router-dom';
+import {Redirect, Link} from 'react-router-dom';
 import {connect} from 'react-redux';
 
 class Members extends Component {
@@ -36,7 +36,8 @@ class Members extends Component {
                     <th>{member.active ? "Yes" : "No"}</th>
                     <th>{member.info}</th>
                     <th>{member.welcome_mail ? "Yes" : "Not yet"}</th>
-                    <th><button>Edit</button></th>
+                    <th><button data-member-id={member.id} onClick={(e)=>{
+                    }}><Link to={`/newmember/${member.id}`}  >Edit</Link></button></th>
                   </tr>
                 )
               })
