@@ -4,6 +4,7 @@ import {connect} from 'react-redux';
 
 class Members extends Component {
   render() {
+    // debugger
     if (!localStorage.token) {
       return <Redirect to='/' />
     } else {
@@ -26,7 +27,7 @@ class Members extends Component {
             {
               this.props.members.map((member) => {
                 return (
-                  <tr key={member.id}>
+                  <tr key={member.email}>
                     <th>{member.register_date}</th>
                     <th>{member.name}</th>
                     <th>{member.email}</th>

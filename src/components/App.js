@@ -60,10 +60,4 @@ const mapStateToProps = (store) => ({
   user: store.user
 })
 
-// const mapDispatchToProps = (dispatch) => ({
-//   fetchingMembers: () => {dispatch(fetchingMembers())},
-//   loginUser: (user) => {dispatch(loginUser(user))}
-// })
-
-// export default connect(mapStateToProps, mapDispatchToProps)(App);
 export default connect(mapStateToProps, {loginUser, fetchingMembers, fetchingGroups})(App);

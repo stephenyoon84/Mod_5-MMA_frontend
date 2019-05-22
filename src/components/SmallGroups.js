@@ -11,7 +11,13 @@ class SmallGroups extends Component {
       // debugger
       return (
         <div>
-          <div>Small groups tables</div>
+          {
+            this.props.user && this.props.user.user_type === 'admin' ? (
+              <button>Create New Group</button>
+            ) : (
+              null
+            )
+          }
           <div>
             {this.props.groups.map((group) => {
               return (
@@ -57,7 +63,8 @@ class SmallGroups extends Component {
 }
 
 const mapStateToProps = (store) => ({
-  groups: store.groups
+  groups: store.groups,
+  user: store.user
 })
 
 export default connect(mapStateToProps)(SmallGroups);

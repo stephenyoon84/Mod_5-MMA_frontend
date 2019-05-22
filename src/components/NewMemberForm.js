@@ -1,44 +1,26 @@
 import React, {Component, Fragment} from 'react';
 import {connect} from 'react-redux';
 import {Button, Form, Grid, Segment} from 'semantic-ui-react';
-import {URL, genderOptions, fetchingMembers, activeOptions, fetchingGroups} from '../redux/actionCreators';
+import {Redirect, withRouter} from 'react-router-dom'
+import {URL, genderOptions, fetchingMembers, activeOptions, welcomeMailOptions, fetchingGroups} from '../redux/actionCreators';
 
 class NewMemberForm extends Component {
   state = {
-    // gender: "",
-    // active: null,
   }
 
-  // componentDidMount(){
-  //   let memberid = parseInt(window.location.pathname.split('/')[2])
-  //   if (memberid) {
-  //     const target = this.props.members.find(m => m.id === memberid)
-  //     // console.log(target)
-  //     // console.log(memberid)
-  //     if (!!target) {
-  //       this.setState({
-  //         gender: target.gender,
-  //         active: target.active,
-  //         welcome_mail: target.welcome_mail,
-  //         memberid: memberid
-  //       })
-  //     }
-  //   } else {
-  //     console.log("new")
-  //   }
-  // }
-  //
   genderChange = (e, d) => {
     this.setState({gender: d.value})
   }
 
   activeChange = (e, d) => {
-    // debugger
     this.setState({active: d.value})
   }
 
+  welcomeChange = (e, d) => {
+    this.setState({welcomeMail: d.value})
+  }
+
   handleClickRegister = (e) => {
-    // debugger
     let name = e.target.parentElement.name.value
     let email = e.target.parentElement.email.value
     let phone_number = e.target.parentElement.phoneNumber.value
@@ -83,8 +65,9 @@ class NewMemberForm extends Component {
     let info = e.target.parentElement.info.value
     let active = this.state.active
     let group = this.state.groups
+    let welcome_mail = this.state.welcomeMail
     let memberid = parseInt(window.location.pathname.split('/')[2])
-    let update_member = {id: memberid, name: name, email: email, phone_number: phone_number, gender: gender, dob: dob, info: info, active: active, group: group}
+    let update_member = {id: memberid, name: name, email: email, phone_number: phone_number, gender: gender, dob: dob, info: info, active: active, group: group, welcome_mail: welcome_mail}
     e.target.parentElement.name.value = ""
     e.target.parentElement.email.value = ""
     e.target.parentElement.phoneNumber.value = ""
@@ -113,6 +96,7 @@ class NewMemberForm extends Component {
       this.props.fetchingMembers()
       this.props.fetchingGroups()
       alert("Update success")
+      return <Redirect to='/' />
     }
   }
 
@@ -127,18 +111,8 @@ class NewMemberForm extends Component {
   }
 
   render() {
-    // debugger
     let memberid = parseInt(window.location.pathname.split('/')[2])
     const target = this.props.members.find(m => m.id === memberid)
-    // console.log(target)
-    // console.log(memberid)
-    // console.log(typeof memberid)
-    // console.log(isNaN(memberid))
-    // if (!isNaN(memberid)){
-    //   const tGender = target.gender
-    //   this.setState({gender: tGender})
-    // }
-    // debugger
     return (
       <div>
         <Segment placeholder>
@@ -157,6 +131,7 @@ class NewMemberForm extends Component {
                   ) : (
                     <Fragment>
                       <Form.Select label="Active?" options={activeOptions} placeholder="Active?" name="active" onChange={this.activeChange} defaultValue={(target === undefined || isNaN(memberid)) ? ("") : (this.state.active ? "Yes" : "No")}/>
+                      <Form.Select label="Welcome Mail" options={welcomeMailOptions} placeholder="Welcome Mail?" onChange={this.welcomeChange} />
                       <Form.Select label="Group" options={this.groupOptions()} name="group" onChange={this.groupChange} />
                     </Fragment>
                   )
@@ -183,4 +158,4 @@ const mapStateToProps = (store) => ({
   groups: store.groups.filter(g => g.year === new Date().getFullYear())
 })
 
-export default connect(mapStateToProps, {fetchingMembers, fetchingGroups})(NewMemberForm)
+export default withRouter(connect(mapStateToProps, {fetchingMembers, fetchingGroups})(NewMemberForm))

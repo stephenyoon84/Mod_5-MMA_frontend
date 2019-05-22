@@ -12,6 +12,11 @@ const activeOptions = [
   {key: 'No', text: 'No', value: false}
 ]
 
+const welcomeMailOptions = [
+  {key: 'Yes', text: 'Yes', value: true},
+  {key: 'Not yet', text: 'Not yet', value: false}
+]
+
 function loginUser(user){
   return {type: LOGIN, payload: user}
 }
@@ -56,4 +61,4 @@ function clearGroups(){
   return {type: CLEAR_GROUPS, payload: []}
 }
 
-export {URL, loginUser, logoutUser,fetchedMembers, fetchingMembers, clearMembers, genderOptions, activeOptions, fetchedGroups, fetchingGroups, clearGroups}
+export {URL, loginUser, logoutUser,fetchedMembers, fetchingMembers, clearMembers, genderOptions, activeOptions, welcomeMailOptions, fetchedGroups, fetchingGroups, clearGroups}
