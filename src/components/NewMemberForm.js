@@ -20,7 +20,8 @@ class NewMemberForm extends Component {
     this.setState({welcomeMail: d.value})
   }
 
-  handleClickRegister = (e) => {
+  handleClickRegister = (e, d) => {
+    debugger
     let name = e.target.parentElement.name.value
     let email = e.target.parentElement.email.value
     let phone_number = e.target.parentElement.phoneNumber.value
