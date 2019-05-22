@@ -2,7 +2,7 @@ import React, {Component} from 'react';
 import {Button, Form, Grid, Segment} from 'semantic-ui-react';
 import {Redirect} from 'react-router-dom';
 import {connect} from 'react-redux';
-import {URL, loginUser, fetchingMembers, genderOptions} from '../redux/actionCreators'
+import {URL, loginUser, fetchingMembers, genderOptions, fetchingGroups} from '../redux/actionCreators'
 
 class Signup extends Component {
   state = {
@@ -82,4 +82,4 @@ const mapStateToProps = (store) => ({
   user: store.user
 })
 
-export default connect(mapStateToProps, {loginUser, fetchingMembers})(Signup)
+export default connect(mapStateToProps, {loginUser, fetchingMembers, fetchingGroups})(Signup)
