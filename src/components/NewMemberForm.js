@@ -1,7 +1,7 @@
 import React, {Component, Fragment} from 'react';
 import {connect} from 'react-redux';
 import {Button, Form, Grid, Segment} from 'semantic-ui-react';
-import {Redirect, withRouter} from 'react-router-dom'
+// import {Redirect, withRouter} from 'react-router-dom'
 import {URL, genderOptions, fetchingMembers, activeOptions, welcomeMailOptions, fetchingGroups} from '../redux/actionCreators';
 
 class NewMemberForm extends Component {
@@ -93,7 +93,7 @@ class NewMemberForm extends Component {
     })
       .then(r => r.json())
       .then(this.handleResponseUpdate)
-      .then(this.props.history.push('/smallgroups'))
+      .then(() => this.props.history.push('/smallgroups'))
   }
 
   handleResponseUpdate = json => {
@@ -162,4 +162,4 @@ const mapStateToProps = (store) => ({
   groups: store.groups.filter(g => g.year === new Date().getFullYear())
 })
 
-export default withRouter(connect(mapStateToProps, {fetchingMembers, fetchingGroups})(NewMemberForm))
+export default connect(mapStateToProps, {fetchingMembers, fetchingGroups})(NewMemberForm)
