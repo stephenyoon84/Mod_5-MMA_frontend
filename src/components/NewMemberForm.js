@@ -21,7 +21,7 @@ class NewMemberForm extends Component {
   }
 
   handleClickRegister = (e, d) => {
-    debugger
+    // debugger
     let name = e.target.parentElement.name.value
     let email = e.target.parentElement.email.value
     let phone_number = e.target.parentElement.phoneNumber.value
@@ -48,6 +48,9 @@ class NewMemberForm extends Component {
     })
       .then(r => r.json())
       .then(this.handleResponseRegister)
+      .then(() => {
+        this.props.history.push('/')
+      })
   }
 
   handleResponseRegister = json => {
@@ -90,6 +93,7 @@ class NewMemberForm extends Component {
     })
       .then(r => r.json())
       .then(this.handleResponseUpdate)
+      .then(this.props.history.push('/smallgroups'))
   }
 
   handleResponseUpdate = json => {
@@ -97,7 +101,6 @@ class NewMemberForm extends Component {
       this.props.fetchingMembers()
       this.props.fetchingGroups()
       alert("Update success")
-      return <Redirect to='/' />
     }
   }
 
