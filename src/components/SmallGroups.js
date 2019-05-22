@@ -13,7 +13,7 @@ class SmallGroups extends Component {
       return (
         <div>
           {
-            this.props.user && this.props.user.user_type === 'admin' ? (
+            this.props.user && (this.props.user.user_type === 'admin' || this.props.user.user_type === 'group_leader') ? (
               <button>Create New Group</button>
             ) : (
               null
