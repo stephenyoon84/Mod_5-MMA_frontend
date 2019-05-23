@@ -20,11 +20,12 @@ class Navbar extends Component {
               {/*<Menu.Item name='Orientation'><Link to='/orientation'>Orientation(optional)</Link></Menu.Item>*/}
               {
                 this.props.user && this.props.user.user_type === 'admin' ? (
-                  <Menu.Item name='ManageUsers'>Manage Users</Menu.Item>
+                  <Menu.Item name='ManageUsers'><Link to='/users'>Manage Users</Link></Menu.Item>
                 ) : (
                   null
                 )
               }
+              <Menu.Item name="MyInfo" className='right'><Link to='/myinfo'>My Info</Link></Menu.Item>
               <Menu.Item name="LogOut" className='right' onClick={() => {
                   localStorage.clear()
                   this.props.logoutUser()
