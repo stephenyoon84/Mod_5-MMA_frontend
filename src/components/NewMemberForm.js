@@ -93,7 +93,7 @@ class NewMemberForm extends Component {
     })
       .then(r => r.json())
       .then(this.handleResponseUpdate)
-      .then(() => this.props.history.push('/smallgroups'))
+      .then(() => this.props.history.push('/members'))
   }
 
   handleResponseUpdate = json => {
