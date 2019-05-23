@@ -9,6 +9,7 @@ import Members from './Members'
 import SmallGroups from './SmallGroups'
 import Welcome from './Welcome'
 import Signup from './Signup'
+import SmallGroupList from './SmallGroupList'
 import {URL, loginUser, fetchingMembers, fetchingGroups} from '../redux/actionCreators'
 
 class App extends Component {
@@ -48,8 +49,8 @@ class App extends Component {
           <Route path="/login" component={Login} />
           <Route path='/newmember' component={NewMemberForm} />
           <Route path='/members' component={Members} />
-          <Route path='/smallgroups' component={SmallGroups} />
           <Route path='/signup' component={Signup} />
+          <Route path='/smallgroups' component={SmallGroupList} />
         </Switch>
       </div>
     );

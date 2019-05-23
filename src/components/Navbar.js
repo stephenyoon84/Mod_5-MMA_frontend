@@ -15,7 +15,8 @@ class Navbar extends Component {
           { !!localStorage.token ? (
             <>
               <Menu.Item name='AllMembers'><Link to='/members'>Manage New Members</Link></Menu.Item>
-              <Menu.Item name='SmallGroups'><Link to='/smallgroups'>Small Groups</Link></Menu.Item>
+              {/*<Menu.Item name='SmallGroups'><Link to='/smallgroups'>Small Groups</Link></Menu.Item>*/}
+              <Menu.Item name='SmallGroupList'><Link to='/smallgroups'>Small Groups</Link></Menu.Item>
               {/*<Menu.Item name='Orientation'><Link to='/orientation'>Orientation(optional)</Link></Menu.Item>*/}
               <Menu.Item name="LogOut" className='right' onClick={() => {
                   localStorage.clear()
