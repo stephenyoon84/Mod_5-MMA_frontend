@@ -10,6 +10,7 @@ import SmallGroups from './SmallGroups'
 import Welcome from './Welcome'
 import Signup from './Signup'
 import SmallGroupList from './SmallGroupList'
+import MyInfo from './MyInfo'
 import {URL, loginUser, fetchingMembers, fetchingGroups} from '../redux/actionCreators'
 
 class App extends Component {
@@ -51,6 +52,7 @@ class App extends Component {
           <Route path='/members' component={Members} />
           <Route path='/signup' component={Signup} />
           <Route path='/smallgroups' component={SmallGroupList} />
+          <Route path='/myinfo' component={MyInfo} />
         </Switch>
       </div>
     );
