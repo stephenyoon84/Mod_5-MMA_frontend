@@ -31,6 +31,7 @@ class Navbar extends Component {
                   this.props.logoutUser()
                   this.props.clearMembers()
                   this.props.clearGroups()
+                  this.props.history.push('/')
                 }}>Log Out</Menu.Item>
               </>
           ) : (

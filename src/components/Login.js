@@ -7,7 +7,7 @@ import {URL, loginUser, fetchingMembers, fetchingGroups} from '../redux/actionCr
 class Login extends Component {
   submitHandler = e => {
     e.preventDefault()
-    console.log(e)
+    // console.log(e)
     let email = e.target.email.value
     let password = e.target.password.value
     fetch(URL + '/login', {

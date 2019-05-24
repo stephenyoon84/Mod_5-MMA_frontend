@@ -6,7 +6,7 @@ import Login from './Login';
 import Navbar from './Navbar';
 import NewMemberForm from './NewMemberForm';
 import Members from './Members'
-import SmallGroups from './SmallGroups'
+// import SmallGroups from './SmallGroups'
 import Welcome from './Welcome'
 import Signup from './Signup'
 import SmallGroupList from './SmallGroupList'
