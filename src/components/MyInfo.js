@@ -5,6 +5,17 @@ import {connect} from 'react-redux';
 // import {URL} from '../redux/actionCreators';
 
 class MyInfo extends Component {
+  handleSubmit = e => {
+    // debugger
+    let name = e.target.name.value
+    let email = e.target.email.value
+    let phone_number = e.target.phoneNumber.value
+    let current_password = e.target.currentPassword.value
+    let new_password = e.target.newPassword.value
+    let password_confirmation = e.target.passwordConfirmation.value
+    let user = {name: name, email: email, phone_number: phone_number, password: current_password, new_password: new_password, password_confirmation: password_confirmation}
+    console.log(user)
+  }
   render() {
     if (!!localStorage.token) {
       if (this.props.user) {
@@ -15,7 +26,7 @@ class MyInfo extends Component {
             <Segment placeholder>
               <Grid columns={3} relaxed='very' centered>
                 <Grid.Column>
-                  <Form>
+                  <Form onSubmit={this.handleSubmit}>
                     <Form.Input icon='user' iconPosition='left' label="Name" name="name" defaultValue={cUser.name} />
                     <Form.Input icon='mail' iconPosition='left' label='email' name='email' defaultValue={cUser.email}/>
                     <Form.Input icon='phone' iconPosition='left' label='Phone Number' name='phoneNumber' defaultValue={cUser.phone_number}/>
