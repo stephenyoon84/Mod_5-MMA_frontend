@@ -3,6 +3,7 @@ import {connect} from 'react-redux';
 import {Button, Form, Grid, Segment} from 'semantic-ui-react';
 // import {Redirect, withRouter} from 'react-router-dom'
 import {URL, genderOptions, fetchingMembers, activeOptions, welcomeMailOptions, fetchingGroups} from '../redux/actionCreators';
+import FormField from './helper'
 
 class NewMemberForm extends Component {
   state = {
@@ -64,18 +65,19 @@ class NewMemberForm extends Component {
     let name = e.target.parentElement.name.value
     let email = e.target.parentElement.email.value
     let phone_number = e.target.parentElement.phoneNumber.value
-    let gender = this.state.gender
-    let dob = e.target.parentElement.dob.value
+    // let gender = this.state.gender
+    // let dob = e.target.parentElement.dob.value
     let info = e.target.parentElement.info.value
     let active = this.state.active
     let group = this.state.groups
     let welcome_mail = this.state.welcomeMail
     let memberid = parseInt(window.location.pathname.split('/')[2])
-    let update_member = {id: memberid, name: name, email: email, phone_number: phone_number, gender: gender, dob: dob, info: info, active: active, group: group, welcome_mail: welcome_mail}
+    // let update_member = {id: memberid, name: name, email: email, phone_number: phone_number, gender: gender, dob: dob, info: info, active: active, group: group, welcome_mail: welcome_mail}
+    let update_member = {id: memberid, name: name, email: email, phone_number: phone_number, info: info, active: active, group: group, welcome_mail: welcome_mail}
     e.target.parentElement.name.value = ""
     e.target.parentElement.email.value = ""
     e.target.parentElement.phoneNumber.value = ""
-    e.target.parentElement.dob.value = ""
+    // e.target.parentElement.dob.value = ""
     e.target.parentElement.info.value = ""
     this.setState({gender: ""})
     console.log(update_member)
@@ -116,25 +118,37 @@ class NewMemberForm extends Component {
 
   render() {
     let memberid = parseInt(window.location.pathname.split('/')[2])
-    const target = this.props.members.find(m => m.id === memberid)
+    let target = this.props.members.find(m => m.id === memberid)
+    if (target === undefined) {
+      target = {name: '', email: '', phone_number: '', gender: '', dob: '', info: '', active: ''}
+    }
+    // debugger
     return (
       <div>
         <Segment placeholder>
           <Grid columns={1} relaxed="very" stackable>
             <Grid.Column>
               <Form >
-                <Form.Input icon='user' iconPosition="left" label="Name" placeholder="Name" name="name" defaultValue={(target === undefined || isNaN(memberid)) ? ("") : (`${target.name}`)}/>
-                <Form.Input icon='mail' iconPosition="left" label="email" placeholder="Email" name="email" defaultValue={(target === undefined || isNaN(memberid)) ? ("") : (`${target.email}`)}/>
-                <Form.Input icon='phone' iconPosition="left" label="Phone Number" placeholder="Phone Number" name="phoneNumber" defaultValue={(target === undefined || isNaN(memberid)) ? ("") : (`${target.phone_number}`)}/>
-                <Form.Select label="Gender" options={genderOptions} placeholder="Gender" name="gender" onChange={this.genderChange} defaultValue={(target === undefined || isNaN(memberid)) ? ("") : (`${target.gender}`)}/>
-                <Form.Input icon='birthday' iconPosition="left" label="Birthday" placeholder="MM/DD/YYYY" name="dob" defaultValue={(target === undefined || isNaN(memberid)) ? ("") : (`${target.dob}`)}/>
-                <Form.Input label="Info" placeholder="Info" name="info" defaultValue={(target === undefined || isNaN(memberid)) ? ("") : (`${target.info}`)}/>
+                {FormField('name', target.name)}
+                {FormField('email', target.email)}
+                {FormField('phone', target.phone_number)}
+                {
+                  isNaN(memberid) ? (
+                    <Fragment>
+                      {FormField('gender', target.gender, this.genderChange)}
+                      {FormField('dob', target.dob)}
+                    </Fragment>
+                  ) : (
+                    null
+                  )
+                }
+                {FormField('info', target.info)}
                 {
                   isNaN(memberid) ? (
                     null
                   ) : (
                     <Fragment>
-                      <Form.Select label="Active?" options={activeOptions} placeholder="Active?" name="active" onChange={this.activeChange} defaultValue={(target === undefined || isNaN(memberid)) ? ("") : (this.state.active ? "Yes" : "No")}/>
+                      {FormField('active', target.value, this.activeChange)}
                       <Form.Select label="Welcome Mail" options={welcomeMailOptions} placeholder="Welcome Mail?" onChange={this.welcomeChange} />
                       <Form.Select label="Group" options={this.groupOptions()} name="group" onChange={this.groupChange} />
                     </Fragment>

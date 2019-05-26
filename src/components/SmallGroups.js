@@ -32,7 +32,7 @@ class SmallGroups extends Component {
                     <tr bgcolor="yellow">
                       <td>{group.leader.leader_name}</td>
                       <td>{group.leader.leader_gender}</td>
-                      <td>{thisYear - parseInt(group.leader.leader_dob.split('-')[0])}</td>
+                      <td>{group.leader.leader_dob === null ? (0) : (thisYear - parseInt(group.leader.leader_dob.split('-')[0]))}</td>
                     </tr>
                     {
                       group.allmembers.map((member) => {
@@ -40,7 +40,7 @@ class SmallGroups extends Component {
                           <tr key={member.email}>
                             <td>{member.name}</td>
                             <td>{member.gender}</td>
-                            <td>{thisYear - parseInt(member.dob.split('-')[0])}</td>
+                            <td>{member.dob === null ? (0) : (thisYear - parseInt(member.dob.split('-')[0]))}</td>
                           </tr>
                         )
                       })
