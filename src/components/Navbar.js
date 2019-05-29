@@ -9,7 +9,7 @@ class Navbar extends Component {
   render() {
     return (
       <Menu>
-        <Menu.Item name='Home'><Link to='/'>Home</Link></Menu.Item>
+        <Menu.Item name='Home'><Link to='/'><img style={{width: 150, height: 50}} src='http://www.kumcgw.org/wp-content/uploads/2013/09/KUMCGW-logo_Final-Korean_small.png' alt=''/></Link></Menu.Item>
         <Menu.Item name='NewForm'><Link to='/newmember' >New Member</Link></Menu.Item>
         <Fragment>
           { !!localStorage.token ? (
