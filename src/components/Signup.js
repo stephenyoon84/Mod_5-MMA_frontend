@@ -40,7 +40,7 @@ class Signup extends Component {
       this.props.fetchingMembers()
       this.props.fetchingGroups()
     } else {
-      console.log("Error")
+      alert("Wrong information. Please check and input again.")
     }
   }
 

@@ -31,7 +31,7 @@ class Login extends Component {
       this.props.fetchingMembers()
       this.props.fetchingGroups()
     } else {
-      console.log("Error")
+      alert("No matching email or password. Please check and try again.")
     }
   }
 

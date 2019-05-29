@@ -13,11 +13,13 @@ const FormField = (type, value, helperM = null) => {
     case 'gender':
       return <Form.Select label="Gender" options={genderOptions} placeholder="Gender" name="gender" onChange={helperM} defaultValue={value}/>
     case 'dob':
-      return <Form.Input icon='birthday' iconPosition="left" label="Birthday" placeholder="MM/DD/YYYY" name="dob" defaultValue={value}/>
+      return <Form.Input icon='birthday' iconPosition="left" label="Birthday" type="date" placeholder="MM/DD/YYYY" name="dob" defaultValue={value}/>
     case 'info':
       return <Form.Input label="Info" placeholder="Info" name="info" defaultValue={value}/>
     case 'active':
-      return <Form.Select label="Active?" options={activeOptions} placeholder="Active?" name="active" onChange={helperM} defaultValue={value ? ('Yes') : ('No')}/>
+      return <Form.Select label="Active?" options={activeOptions} name="active" onChange={helperM} defaultValue={value}/>
+    case 'welcome':
+      return <Form.Select label="Welcome Mail" options={welcomeMailOptions} placeholder="Welcome Mail?" onChange={helperM} defaultValue={value ? ('Yes') : ('Not Yet')} />
     default:
       return null
   }

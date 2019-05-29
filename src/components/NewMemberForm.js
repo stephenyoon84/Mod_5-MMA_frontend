@@ -2,7 +2,7 @@ import React, {Component, Fragment} from 'react';
 import {connect} from 'react-redux';
 import {Button, Form, Grid, Segment} from 'semantic-ui-react';
 // import {Redirect, withRouter} from 'react-router-dom'
-import {URL, genderOptions, fetchingMembers, activeOptions, welcomeMailOptions, fetchingGroups} from '../redux/actionCreators';
+import {URL, fetchingMembers, fetchingGroups} from '../redux/actionCreators';
 import FormField from './helper'
 
 class NewMemberForm extends Component {
@@ -18,7 +18,7 @@ class NewMemberForm extends Component {
   }
 
   welcomeChange = (e, d) => {
-    this.setState({welcomeMail: d.value})
+    this.setState({welcome_mail: d.value})
   }
 
   handleClickRegister = (e, d) => {
@@ -58,6 +58,8 @@ class NewMemberForm extends Component {
     if (json["success"]) {
       this.props.fetchingMembers()
       alert("Register success")
+    } else {
+      alert("Wrong information. Please check and input again.")
     }
   }
 
@@ -70,7 +72,7 @@ class NewMemberForm extends Component {
     let info = e.target.parentElement.info.value
     let active = this.state.active
     let group = this.state.groups
-    let welcome_mail = this.state.welcomeMail
+    let welcome_mail = this.state.welcome_mail
     let memberid = parseInt(window.location.pathname.split('/')[2])
     // let update_member = {id: memberid, name: name, email: email, phone_number: phone_number, gender: gender, dob: dob, info: info, active: active, group: group, welcome_mail: welcome_mail}
     let update_member = {id: memberid, name: name, email: email, phone_number: phone_number, info: info, active: active, group: group, welcome_mail: welcome_mail}
@@ -99,10 +101,14 @@ class NewMemberForm extends Component {
   }
 
   handleResponseUpdate = json => {
+    // debugger
     if (json["success"]) {
       this.props.fetchingMembers()
       this.props.fetchingGroups()
       alert("Update success")
+    } else {
+      // debugger
+      alert("Wrong information. Please check and input again.")
     }
   }
 
@@ -120,7 +126,7 @@ class NewMemberForm extends Component {
     let memberid = parseInt(window.location.pathname.split('/')[2])
     let target = this.props.members.find(m => m.id === memberid)
     if (target === undefined) {
-      target = {name: '', email: '', phone_number: '', gender: '', dob: '', info: '', active: ''}
+      target = {name: '', email: '', phone_number: '', gender: '', dob: '', info: '', active: '', welcome_mail: ''}
     }
     // debugger
     return (
@@ -148,8 +154,8 @@ class NewMemberForm extends Component {
                     null
                   ) : (
                     <Fragment>
-                      {FormField('active', target.value, this.activeChange)}
-                      <Form.Select label="Welcome Mail" options={welcomeMailOptions} placeholder="Welcome Mail?" onChange={this.welcomeChange} />
+                      {FormField('active', target.active, this.activeChange)}
+                      {FormField('welcome', target.welcome_mail, this.welcomeChange)}
                       <Form.Select label="Group" options={this.groupOptions()} name="group" onChange={this.groupChange} />
                     </Fragment>
                   )

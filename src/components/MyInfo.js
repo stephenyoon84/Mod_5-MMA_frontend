@@ -2,25 +2,51 @@ import React, { Component } from 'react';
 import {Button, Form, Segment, Grid} from 'semantic-ui-react';
 import {Redirect} from 'react-router-dom';
 import {connect} from 'react-redux';
-// import {URL} from '../redux/actionCreators';
+import {URL} from '../redux/actionCreators';
 
 class MyInfo extends Component {
   handleSubmit = e => {
     // debugger
+    let id = this.props.user.id
     let name = e.target.name.value
     let email = e.target.email.value
     let phone_number = e.target.phoneNumber.value
     let current_password = e.target.currentPassword.value
     let new_password = e.target.newPassword.value
     let password_confirmation = e.target.passwordConfirmation.value
-    let user = {name: name, email: email, phone_number: phone_number, password: current_password, new_password: new_password, password_confirmation: password_confirmation}
-    console.log(user)
+    let user = {id: id, name: name, email: email, phone_number: phone_number, password: current_password, new_password: new_password, password_confirmation: password_confirmation}
+    let token = localStorage.getItem('token')
+    // console.log(user)
+    current_password = ''
+    fetch(URL + `/users/${id}`, {
+      method: 'PATCH',
+      headers: {
+        "Content-Type": "application/json",
+        "Accept": "application/json",
+        "Authorization": `Bearer ${token}`
+      },
+      body: JSON.stringify({
+        user: user
+      })
+    })
+      .then(r => r.json())
+      .then(this.handleResponse)
+      .then(() => this.props.history.push('/'))
   }
+
+  handleResponse = json => {
+    if (json["success"]) {
+      alert(json["message"])
+    } else {
+      alert(json["message"])
+    }
+  }
+
   render() {
     if (!!localStorage.token) {
       if (this.props.user) {
         const cUser = this.props.user
-        console.log(cUser)
+        // console.log(cUser)
         return (
           <div>
             <Segment placeholder>
