@@ -9,7 +9,8 @@ class Users extends Component {
         <div>
           <div>display all users and manage user type</div>
           {this.props.users.map(u => {
-            return <div>{u.email}</div>
+            // debugger
+            return <div key={u.id}>{u.name} - {u.user_type} - Updated: {new Date(u.updated_at).toLocaleDateString()}</div>
           })}
         </div>
       )
