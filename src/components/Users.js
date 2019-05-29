@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import {Redirect} from 'react-router-dom';
 import {connect} from 'react-redux';
 import {Dropdown} from 'semantic-ui-react'
+import {URL, fetchingUsers} from '../redux/actionCreators'
 
 const typeOptions = [
   {key: 'new_user', text: 'new_user', value: 'new_user'},
@@ -12,6 +13,33 @@ const typeOptions = [
 ]
 
 class Users extends Component {
+  typeChange = (type, target) => {
+    // debugger
+    let new_roll = {user_type: type}
+    let token = localStorage.getItem('token')
+    fetch(URL + `/users/${target.id}`, {
+      method: 'PATCH',
+      headers: {
+        "Content-Type": "application/json",
+        "Accept": "application/json",
+        "Authorization": `Bearer ${token}`
+      },
+      body: JSON.stringify({
+        user: new_roll
+      })
+    })
+      .then(r => r.json())
+      .then(this.handleResponse)
+    // console.log(type)
+  }
+
+  handleResponse = json => {
+    if (json["success"]){
+      this.props.fetchingUsers()
+      alert(json["message"])
+    }
+  }
+
   render(){
     if (this.props.user && this.props.user.user_type === 'admin'){
       return (
@@ -32,10 +60,7 @@ class Users extends Component {
                   <tr key={u.id}>
                     <th name='name'>{u.name}</th>
                     <th name='email'>{u.email}</th>
-                    <th name='type'>{<Dropdown fluid onChange={(e)=> {
-                        debugger
-                        console.log(e)
-                      } } options={typeOptions} defaultValue={u.user_type}/>}</th>
+                    <th name='type'>{<Dropdown fluid onChange={(e)=> this.typeChange(e.target.innerText, u)} options={typeOptions} defaultValue={u.user_type}/>}</th>
                     <th name='updated'>{new Date(u.updated_at).toLocaleDateString()}</th>
                   </tr>)
                   })}
@@ -54,4 +79,4 @@ const mapStateToProps = (store) => ({
   users: store.users
 })
 
-export default connect(mapStateToProps)(Users)
+export default connect(mapStateToProps, {fetchingUsers})(Users)
