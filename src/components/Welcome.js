@@ -6,7 +6,7 @@ class Welcome extends Component {
     if (this.props.user !== null) {
       return <h1>Welcome {this.props.user.name}</h1>
     } else {
-      return <h1>Welcome to UMC</h1>
+      return <h1>Welcome to KUMC</h1>
     }
   }
 }
