@@ -63,7 +63,7 @@ class Signup extends Component {
                 <Form.Input icon='mail' iconPosition="left" label="email" placeholder="Email" name="email"/>
                 <Form.Input icon='phone' iconPosition="left" label="Phone Number" placeholder="Phone Number" name="phoneNumber"/>
                 <Form.Select label="Gender" options={genderOptions} placeholder="Gender" name="gender" onChange={this.genderChange}/>
-                <Form.Input icon='birthday' iconPosition="left" label="Birthday" placeholder="MM/DD/YYYY" name="dob"/>
+                <Form.Input icon='birthday' iconPosition="left" type="date" label="Birthday" placeholder="MM/DD/YYYY" name="dob"/>
 
                 <Form.Input icon='lock' iconPosition="left" label="password" type="password" placeholder="Password" name="password"/>
                 <Form.Input icon='lock' iconPosition="left" label="password_confirmation" type="password" placeholder="Password Confirmation" name="password_confirmation"/>
