@@ -6,7 +6,12 @@ class Users extends Component {
   render(){
     if (this.props.user && this.props.user.user_type === 'admin'){
       return (
-        <div>display all users and manage user type</div>
+        <div>
+          <div>display all users and manage user type</div>
+          {this.props.users.map(u => {
+            return <div>{u.email}</div>
+          })}
+        </div>
       )
     } else {
       return <Redirect to='/' />
@@ -15,7 +20,8 @@ class Users extends Component {
 }
 
 const mapStateToProps = (store) => ({
-  user: store.user
+  user: store.user,
+  users: store.users
 })
 
 export default connect(mapStateToProps)(Users)

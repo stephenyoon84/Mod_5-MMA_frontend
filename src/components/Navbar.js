@@ -2,7 +2,7 @@ import React, {Component, Fragment} from 'react';
 import {Link, withRouter} from 'react-router-dom';
 import {Menu} from 'semantic-ui-react';
 import {connect} from 'react-redux';
-import {logoutUser, clearMembers, clearGroups} from '../redux/actionCreators'
+import {logoutUser, clearMembers, clearGroups, clearUsers} from '../redux/actionCreators'
 
 class Navbar extends Component {
 
@@ -31,6 +31,7 @@ class Navbar extends Component {
                   this.props.logoutUser()
                   this.props.clearMembers()
                   this.props.clearGroups()
+                  this.props.clearUsers()
                   this.props.history.push('/')
                 }}>Log Out</Menu.Item>
               </>
@@ -47,4 +48,4 @@ const mapStateToProps = (store) => {
   return {user: store.user}
 }
 
-export default withRouter(connect(mapStateToProps, {logoutUser, clearMembers, clearGroups})(Navbar))
+export default withRouter(connect(mapStateToProps, {logoutUser, clearMembers, clearGroups, clearUsers})(Navbar))

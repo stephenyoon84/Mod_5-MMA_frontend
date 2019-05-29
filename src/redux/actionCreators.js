@@ -1,4 +1,4 @@
-import {LOGIN, LOGOUT, FETCHED_MEMBERS, CLEAR_MEMBERS, FETCHED_GROUPS, CLEAR_GROUPS} from './actionType';
+import {LOGIN, LOGOUT, FETCHED_MEMBERS, CLEAR_MEMBERS, FETCHED_GROUPS, CLEAR_GROUPS, FETCHED_USERS, CLEAR_USERS} from './actionType';
 
 const URL = 'http://localhost:3001/api/v1'
 
@@ -51,8 +51,8 @@ function fetchingGroups() {
   return (dispatch) => {
     fetch(URL + '/groups')
       .then(r => r.json())
-      .then(groupArray => {
-        dispatch(fetchedGroups(groupArray))
+      .then(groupsArray => {
+        dispatch(fetchedGroups(groupsArray))
       })
   }
 }
@@ -61,4 +61,22 @@ function clearGroups(){
   return {type: CLEAR_GROUPS, payload: []}
 }
 
-export {URL, loginUser, logoutUser,fetchedMembers, fetchingMembers, clearMembers, genderOptions, activeOptions, welcomeMailOptions, fetchedGroups, fetchingGroups, clearGroups}
+function fetchedUsers(usersArray){
+  return {type: FETCHED_USERS, payload: usersArray}
+}
+
+function fetchingUsers() {
+  return (dispatch) => {
+    fetch(URL + '/users')
+      .then(r => r.json())
+      .then(usersArray => {
+        dispatch(fetchedUsers(usersArray))
+      })
+  }
+}
+
+function clearUsers(){
+  return {type: CLEAR_USERS, payload: []}
+}
+
+export {URL, loginUser, logoutUser,fetchedMembers, fetchingMembers, clearMembers, genderOptions, activeOptions, welcomeMailOptions, fetchedGroups, fetchingGroups, clearGroups, fetchedUsers, fetchingUsers, clearUsers}
