@@ -9,24 +9,17 @@ class SmallGroups extends Component {
     if (!localStorage.token){
       return <Redirect to='/' />
     } else {
-      // debugger
+      let targetGroup = this.props.groups.filter(g => g.year === this.props.targetYear)
       return (
         <div>
-          {
-            this.props.user && (this.props.user.user_type === 'admin' || this.props.user.user_type === 'group_leader') ? (
-              <button>Create New Group</button>
-            ) : (
-              null
-            )
-          }
           <div>
-            {this.props.groups.map((group) => {
+            {targetGroup.map((group) => {
               return (
                 <table key={group.id}>
                   <thead>
                     <tr>
                       <th>
-                        {group.name} - {group.year}
+                        {group.name}{/* - {group.year}*/}
                       </th>
                     </tr>
                     <tr>
@@ -39,7 +32,7 @@ class SmallGroups extends Component {
                     <tr bgcolor="yellow">
                       <td>{group.leader.leader_name}</td>
                       <td>{group.leader.leader_gender}</td>
-                      <td>{thisYear - parseInt(group.leader.leader_dob.split('-')[0])}</td>
+                      <td>{group.leader.leader_dob === null ? (0) : (thisYear - parseInt(group.leader.leader_dob.split('-')[0]))}</td>
                     </tr>
                     {
                       group.allmembers.map((member) => {
@@ -47,7 +40,7 @@ class SmallGroups extends Component {
                           <tr key={member.email}>
                             <td>{member.name}</td>
                             <td>{member.gender}</td>
-                            <td>{thisYear - parseInt(member.dob.split('-')[0])}</td>
+                            <td>{member.dob === null ? (0) : (thisYear - parseInt(member.dob.split('-')[0]))}</td>
                           </tr>
                         )
                       })

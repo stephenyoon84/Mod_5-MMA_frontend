@@ -6,10 +6,13 @@ import Login from './Login';
 import Navbar from './Navbar';
 import NewMemberForm from './NewMemberForm';
 import Members from './Members'
-import SmallGroups from './SmallGroups'
+// import SmallGroups from './SmallGroups'
 import Welcome from './Welcome'
 import Signup from './Signup'
-import {URL, loginUser, fetchingMembers, fetchingGroups} from '../redux/actionCreators'
+import SmallGroupList from './SmallGroupList'
+import Users from './Users'
+import MyInfo from './MyInfo'
+import {URL, loginUser, fetchingMembers, fetchingGroups, fetchingUsers} from '../redux/actionCreators'
 
 class App extends Component {
 
@@ -34,6 +37,9 @@ class App extends Component {
       this.props.loginUser(json["user"])
       this.props.fetchingMembers()
       this.props.fetchingGroups()
+      if (this.props.user.user_type === 'admin'){
+        this.props.fetchingUsers()
+      }
     } else {
       console.log("Error")
     }
@@ -48,8 +54,10 @@ class App extends Component {
           <Route path="/login" component={Login} />
           <Route path='/newmember' component={NewMemberForm} />
           <Route path='/members' component={Members} />
-          <Route path='/smallgroups' component={SmallGroups} />
           <Route path='/signup' component={Signup} />
+          <Route path='/smallgroups' component={SmallGroupList} />
+          <Route path='/users' component={Users} />
+          <Route path='/myinfo' component={MyInfo} />
         </Switch>
       </div>
     );
@@ -60,4 +68,4 @@ const mapStateToProps = (store) => ({
   user: store.user
 })
 
-export default connect(mapStateToProps, {loginUser, fetchingMembers, fetchingGroups})(App);
+export default connect(mapStateToProps, {loginUser, fetchingMembers, fetchingGroups, fetchingUsers})(App);

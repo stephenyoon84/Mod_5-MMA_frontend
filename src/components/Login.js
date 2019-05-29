@@ -2,12 +2,12 @@ import React, {Component} from 'react';
 import {Button, Divider, Form, Grid, Segment} from 'semantic-ui-react';
 import {Link, Redirect} from 'react-router-dom';
 import {connect} from 'react-redux'
-import {URL, loginUser, fetchingMembers, fetchingGroups} from '../redux/actionCreators'
+import {URL, loginUser, fetchingMembers, fetchingGroups, fetchingUsers} from '../redux/actionCreators'
 
 class Login extends Component {
   submitHandler = e => {
     e.preventDefault()
-    console.log(e)
+    // console.log(e)
     let email = e.target.email.value
     let password = e.target.password.value
     fetch(URL + '/login', {
@@ -30,8 +30,11 @@ class Login extends Component {
       this.props.loginUser(json["user"])
       this.props.fetchingMembers()
       this.props.fetchingGroups()
+      if (this.props.user.user_type === 'admin'){
+        this.props.fetchingUsers()
+      }
     } else {
-      console.log("Error")
+      alert("No matching email or password. Please check and try again.")
     }
   }
 
@@ -64,4 +67,4 @@ const mapStateToProps = (store) => ({
   user: store.user
 })
 
-export default connect(mapStateToProps, {loginUser, fetchingMembers, fetchingGroups})(Login)
+export default connect(mapStateToProps, {loginUser, fetchingMembers, fetchingGroups, fetchingUsers})(Login)
