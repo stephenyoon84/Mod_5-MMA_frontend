@@ -36,7 +36,7 @@ class NewMemberForm extends Component {
     e.target.parentElement.dob.value = ""
     e.target.parentElement.info.value = ""
     this.setState({gender: ""})
-    console.log(new_member)
+    // console.log(new_member)
     fetch(URL + '/members', {
       method: 'POST',
       headers: {

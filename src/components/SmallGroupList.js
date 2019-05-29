@@ -1,12 +1,57 @@
 import React, {Component} from 'react';
 import {Link, Switch, Route} from 'react-router-dom';
 import {connect} from 'react-redux';
-import {Grid} from 'semantic-ui-react';
+import {Grid, Form, Button} from 'semantic-ui-react';
 import SmallGroups from './SmallGroups'
-// import {URL} from '../redux/actionCreators';
+import {URL, fetchingGroups} from '../redux/actionCreators';
 import CreateGroup from './CreateGroup'
 
 class SmallGroupList extends Component {
+  state = {}
+
+  leaderOptions = () => {
+    // return this.props.groups.map(g => {
+    //   return {key: g.name, text: g.name, value: g.name}
+    return this.props.users.filter(u => u.user_type === 'group_leader').map(l => {
+      // debugger
+      return {key: l.name, text: l.name, value: l.name}
+    })
+  }
+
+  leaderChange = (e, d) => {
+    this.setState({leader: d.value})
+  }
+
+  handleCreateGroup = (e) => {
+    let leader = this.state.leader
+    let name = e.target.parentElement.name.value
+    let token = localStorage.getItem('token')
+    let group = {name: name, user_name: leader}
+    // console.log(leader, name)
+    fetch(URL + '/groups', {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+        "Accept": "application/json",
+        "Authorization": `Bearer ${token}`
+      },
+      body: JSON.stringify({
+        group: group
+      })
+    })
+      .then(r => r.json())
+      .then(this.handleResponse)
+  }
+
+  handleResponse = json => {
+    if (json["success"]) {
+      this.props.fetchingGroups()
+      alert(json['message'])
+    } else {
+      alert(json['message'])
+    }
+  }
+
   render() {
     let years = [...new Set(this.props.groups.map(g => g.year))]
     return (
@@ -19,8 +64,12 @@ class SmallGroupList extends Component {
               })}
             </ul>
             {
-              this.props.user && (this.props.user.user_type === 'admin' || this.props.user.user_type === 'group_leader') ? (
-                <Link to={'/smallgroups/creategroup'}><button>Create New Group</button></Link>
+              this.props.user && (this.props.user.user_type === 'admin') ? (
+                  <Form>
+                    <Form.Input name='name'/>
+                    <Form.Select style={{minWidth: 0}} options={this.leaderOptions()} onChange={this.leaderChange}/>
+                    <Button onClick={this.handleCreateGroup}>Create New Group</Button>
+                  </Form>
               ) : (
                 null
               )
@@ -42,7 +91,8 @@ class SmallGroupList extends Component {
 
 const mapStateToProps = (store) => ({
   groups: store.groups,
-  user: store.user
+  user: store.user,
+  users: store.users
 })
 
-export default connect(mapStateToProps)(SmallGroupList)
+export default connect(mapStateToProps, {fetchingGroups})(SmallGroupList)
