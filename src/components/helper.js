@@ -19,7 +19,7 @@ const FormField = (type, value, helperM = null) => {
     case 'active':
       return <Form.Select label="Active?" options={activeOptions} name="active" onChange={helperM} defaultValue={value}/>
     case 'welcome':
-      return <Form.Select label="Welcome Mail" options={welcomeMailOptions} placeholder="Welcome Mail?" onChange={helperM} defaultValue={value ? ('Yes') : ('Not Yet')} />
+      return <Form.Select label="Welcome Mail" options={welcomeMailOptions} placeholder="Welcome Mail?" onChange={helperM} defaultValue={value} />
     default:
       return null
   }
