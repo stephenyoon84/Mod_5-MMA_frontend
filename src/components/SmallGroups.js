@@ -19,7 +19,7 @@ class SmallGroups extends Component {
                   <thead>
                     <tr>
                       <th>
-                        {group.name}{/* - {group.year}*/}
+                        {group.name}
                       </th>
                     </tr>
                     <tr>
