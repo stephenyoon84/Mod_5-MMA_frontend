@@ -1,18 +1,9 @@
 import React, {Component} from 'react';
-import {connect} from 'react-redux';
 
 class Welcome extends Component {
   render() {
-    if (this.props.user !== null) {
-      return <h1>Welcome {this.props.user.name}</h1>
-    } else {
-      return <h1>Welcome to KUMC</h1>
-    }
+    return <h1 id='welcome'>Welcome to KUMC<br/>와싱톤 한인교회에 오신것을 환영합니다.</h1>
   }
 }
 
-const mapStateToProps = (store) => ({
-  user: store.user
-})
-
-export default connect(mapStateToProps)(Welcome)
+export default Welcome
