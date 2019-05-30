@@ -20,7 +20,7 @@ th, td {
 }
 
 tr:hover {
-  background-color: #f0f0f0;
+  background-color: rgba(254, 254, 4, 0.5);
 }
 
 /****************** nav bar ******************/
