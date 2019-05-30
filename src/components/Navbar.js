@@ -12,12 +12,20 @@ class Navbar extends Component {
         <Menu.Item name='Home' className='logo home'><Link to='/'><img style={{width: 150, height: 50}} src='http://www.kumcgw.org/wp-content/uploads/2013/09/KUMCGW-logo_Final-Korean_small.png' alt=''/></Link></Menu.Item>
         <Menu.Item name='NewForm'><Link to='/newmember' >New Member<br/>새가족</Link></Menu.Item>
         <Fragment>
-          { !!localStorage.token ? (
+          { (this.props.user && this.props.user.user_type !== 'new_user') || !!localStorage.token ? (
             <>
-              <Menu.Item name='AllMembers'><Link to='/members'>Manage New Members<br/>새가족 관리</Link></Menu.Item>
-              {/*<Menu.Item name='SmallGroups'><Link to='/smallgroups'>Small Groups</Link></Menu.Item>*/}
-              <Menu.Item name='SmallGroupList'><Link to='/smallgroups'>Small Groups<br/>속관리</Link></Menu.Item>
-              {/*<Menu.Item name='Orientation'><Link to='/orientation'>Orientation(optional)</Link></Menu.Item>*/}
+              {
+                this.props.user && this.props.user.user_type !== 'new_user' ? (
+                  <>
+                    <Menu.Item name='AllMembers'><Link to='/members'>Manage New Members<br/>새가족 관리</Link></Menu.Item>
+                    {/*<Menu.Item name='SmallGroups'><Link to='/smallgroups'>Small Groups</Link></Menu.Item>*/}
+                    <Menu.Item name='SmallGroupList'><Link to='/smallgroups'>Small Groups<br/>속 관리</Link></Menu.Item>
+                    {/*<Menu.Item name='Orientation'><Link to='/orientation'>Orientation(optional)</Link></Menu.Item>*/}
+                  </>
+                ) : (
+                  null
+                )
+              }
               {
                 this.props.user && this.props.user.user_type === 'admin' ? (
                   <Menu.Item name='ManageUsers'><Link to='/users'>Manage Users<br/>새가족팀관리</Link></Menu.Item>

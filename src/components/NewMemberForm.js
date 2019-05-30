@@ -13,13 +13,13 @@ class NewMemberForm extends Component {
     this.setState({gender: d.value})
   }
 
-  activeChange = (e, d) => {
-    this.setState({active: d.value})
-  }
-
-  welcomeChange = (e, d) => {
-    this.setState({welcome_mail: d.value})
-  }
+  // activeChange = (e, d) => {
+  //   this.setState({active: d.value})
+  // }
+  //
+  // welcomeChange = (e, d) => {
+  //   this.setState({welcome_mail: d.value})
+  // }
 
   handleClickRegister = (e, d) => {
     // debugger
@@ -70,19 +70,17 @@ class NewMemberForm extends Component {
     // let gender = this.state.gender
     // let dob = e.target.parentElement.dob.value
     let info = e.target.parentElement.info.value
-    let active = this.state.active
     let group = this.state.groups
-    let welcome_mail = this.state.welcome_mail
     let memberid = parseInt(window.location.pathname.split('/')[2])
     // let update_member = {id: memberid, name: name, email: email, phone_number: phone_number, gender: gender, dob: dob, info: info, active: active, group: group, welcome_mail: welcome_mail}
-    let update_member = {id: memberid, name: name, email: email, phone_number: phone_number, info: info, active: active, group: group, welcome_mail: welcome_mail}
+    let update_member = {id: memberid, name: name, email: email, phone_number: phone_number, info: info, group: group}
     e.target.parentElement.name.value = ""
     e.target.parentElement.email.value = ""
     e.target.parentElement.phoneNumber.value = ""
     // e.target.parentElement.dob.value = ""
     e.target.parentElement.info.value = ""
     this.setState({gender: ""})
-    console.log(update_member)
+    // console.log(update_member)
     const token = localStorage.getItem('token')
     fetch(URL + `/members/${memberid}`, {
       method: 'PATCH',
@@ -154,8 +152,6 @@ class NewMemberForm extends Component {
                     null
                   ) : (
                     <Fragment>
-                      {FormField('active', target.active, this.activeChange)}
-                      {FormField('welcome', target.welcome_mail, this.welcomeChange)}
                       <Form.Select label="Group" options={this.groupOptions()} name="group" onChange={this.groupChange} />
                     </Fragment>
                   )

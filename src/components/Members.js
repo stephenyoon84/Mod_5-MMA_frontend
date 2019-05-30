@@ -48,7 +48,7 @@ class Members extends Component {
       return <Redirect to='/' />
     } else {
       return (
-        <table>
+        <table className='members'>
           <thead>
             <tr>
               <th>Date</th>
