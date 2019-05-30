@@ -47,6 +47,7 @@ class SmallGroupList extends Component {
     if (json["success"]) {
       this.props.fetchingGroups()
       alert(json['message'])
+      this.props.history.push('/smallgroups/2019')
     } else {
       alert(json['message'])
     }
