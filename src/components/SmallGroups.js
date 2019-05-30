@@ -20,7 +20,7 @@ class SmallGroups extends Component {
                   <table className='smallgroup'>
                     <thead>
                       <tr>
-                        <th>
+                        <th className='gname'>
                           {group.name}
                         </th>
                       </tr>

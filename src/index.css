@@ -60,11 +60,15 @@ table.users {
   background-color: white;
 }
 
+thead {
+  background-color: rgba(50, 255, 150, 0.5);
+}
+
 th, td {
   border: 1px solid black;
 }
 
-tr:hover {
+tbody tr:hover {
   background-color: rgba(254, 254, 4, 0.5);
 }
 
@@ -76,8 +80,10 @@ tr.user {
   background-color: rgba(245, 168, 96)
 }
 
-
-
+th.gname {
+  min-width: 70px;
+  background-color: white;
+}
 
 
 /****************** end ******************/
