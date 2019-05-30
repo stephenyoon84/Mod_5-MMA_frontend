@@ -1,6 +1,7 @@
 import React, {Component} from 'react';
 import {Redirect} from 'react-router-dom';
 import {connect} from 'react-redux';
+import {Grid} from 'semantic-ui-react';
 
 class SmallGroups extends Component {
   render() {
@@ -12,44 +13,46 @@ class SmallGroups extends Component {
       let targetGroup = this.props.groups.filter(g => g.year === this.props.targetYear)
       return (
         <div>
-          <div>
+          <Grid container columns={5}>
             {targetGroup.map((group) => {
               return (
-                <table key={group.id}>
-                  <thead>
-                    <tr>
-                      <th>
-                        {group.name}
-                      </th>
-                    </tr>
-                    <tr>
-                      <th>name</th>
-                      <th>gender</th>
-                      <th>age</th>
-                    </tr>
-                  </thead>
-                  <tbody>
-                    <tr bgcolor="yellow">
-                      <td>{group.leader.leader_name}</td>
-                      <td>{group.leader.leader_gender}</td>
-                      <td>{group.leader.leader_dob === null ? (0) : (thisYear - parseInt(group.leader.leader_dob.split('-')[0]))}</td>
-                    </tr>
-                    {
-                      group.allmembers.map((member) => {
-                        return (
-                          <tr key={member.email}>
-                            <td>{member.name}</td>
-                            <td>{member.gender}</td>
-                            <td>{member.dob === null ? (0) : (thisYear - parseInt(member.dob.split('-')[0]))}</td>
-                          </tr>
-                        )
-                      })
-                    }
-                  </tbody>
-                </table>
+                <Grid.Column key={group.id}>
+                  <table className='smallgroup'>
+                    <thead>
+                      <tr>
+                        <th>
+                          {group.name}
+                        </th>
+                      </tr>
+                      <tr>
+                        <th>name</th>
+                        <th>gender</th>
+                        <th>age</th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      <tr className='leader'>
+                        <td>{group.leader.leader_name}</td>
+                        <td>{group.leader.leader_gender}</td>
+                        <td>{group.leader.leader_dob === null ? (0) : (thisYear - parseInt(group.leader.leader_dob.split('-')[0]))}</td>
+                      </tr>
+                      {
+                        group.allmembers.filter(m => m.active).map((member) => {
+                          return (
+                            <tr key={member.email} className={!!member.user_type ? 'user' : null}>
+                              <td>{member.name}</td>
+                              <td>{member.gender}</td>
+                              <td>{member.dob === null ? (0) : (thisYear - parseInt(member.dob.split('-')[0]))}</td>
+                            </tr>
+                          )
+                        })
+                      }
+                    </tbody>
+                  </table>
+                </Grid.Column>
               )
             })}
-          </div>
+          </Grid>
         </div>
       )
     }

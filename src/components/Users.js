@@ -44,7 +44,7 @@ class Users extends Component {
     if (this.props.user && this.props.user.user_type === 'admin'){
       return (
         <div>
-          <table class='users'>
+          <table className='users'>
             <thead>
               <tr>
                 <th>Name</th>

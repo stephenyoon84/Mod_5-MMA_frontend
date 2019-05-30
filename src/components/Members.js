@@ -2,7 +2,7 @@ import React, {Component} from 'react';
 import {Redirect, Link} from 'react-router-dom';
 import {connect} from 'react-redux';
 import {Dropdown} from 'semantic-ui-react';
-import {URL, activeOptions, welcomeMailOptions, fetchingMembers} from '../redux/actionCreators'
+import {URL, activeOptions, welcomeMailOptions, fetchingMembers, fetchingGroups} from '../redux/actionCreators'
 
 class Members extends Component {
   activeChange = (e, target) => {
@@ -21,7 +21,10 @@ class Members extends Component {
       })
     })
       .then(r => r.json())
-      .then(this.props.fetchingMembers)
+      .then(() => {
+        this.props.fetchingMembers()
+        this.props.fetchingGroups()
+      })
   }
 
   welcomeChange = (e, target) => {
@@ -40,7 +43,9 @@ class Members extends Component {
       })
     })
       .then(r => r.json())
-      .then(this.props.fetchingMembers)
+      .then(() => {
+        this.props.fetchingMembers()
+      })
   }
 
   render() {
@@ -95,4 +100,4 @@ const mapStateToProps = (store) => ({
   members: store.members
 })
 
-export default connect(mapStateToProps, {fetchingMembers})(Members);
+export default connect(mapStateToProps, {fetchingMembers, fetchingGroups})(Members);
