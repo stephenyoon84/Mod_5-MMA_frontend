@@ -14,7 +14,6 @@ const typeOptions = [
 
 class Users extends Component {
   typeChange = (type, target) => {
-    // debugger
     let new_roll = {user_type: type}
     let token = localStorage.getItem('token')
     fetch(URL + `/users/${target.id}`, {
@@ -30,7 +29,6 @@ class Users extends Component {
     })
       .then(r => r.json())
       .then(this.handleResponse)
-    // console.log(type)
   }
 
   handleResponse = json => {
@@ -55,7 +53,6 @@ class Users extends Component {
             </thead>
             <tbody>
               {this.props.users.map(u => {
-                // debugger
                 return (
                   <tr key={u.id}>
                     <th name='name'>{u.name}</th>

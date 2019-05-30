@@ -18,9 +18,7 @@ class Navbar extends Component {
                 this.props.user && this.props.user.user_type !== 'new_user' ? (
                   <>
                     <Menu.Item name='AllMembers' className='navbtn'><Link to='/members'>Manage New Members<br/>새가족 관리</Link></Menu.Item>
-                    {/*<Menu.Item name='SmallGroups'><Link to='/smallgroups'>Small Groups</Link></Menu.Item>*/}
                     <Menu.Item name='SmallGroupList' className='navbtn'><Link to='/smallgroups'>Small Groups<br/>속 관리</Link></Menu.Item>
-                    {/*<Menu.Item name='Orientation'><Link to='/orientation'>Orientation(optional)</Link></Menu.Item>*/}
                   </>
                 ) : (
                   null

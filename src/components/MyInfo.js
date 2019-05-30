@@ -6,7 +6,6 @@ import {URL} from '../redux/actionCreators';
 
 class MyInfo extends Component {
   handleSubmit = e => {
-    // debugger
     let id = this.props.user.id
     let name = e.target.name.value
     let email = e.target.email.value
@@ -16,7 +15,6 @@ class MyInfo extends Component {
     let password_confirmation = e.target.passwordConfirmation.value
     let user = {id: id, name: name, email: email, phone_number: phone_number, password: current_password, new_password: new_password, password_confirmation: password_confirmation}
     let token = localStorage.getItem('token')
-    // console.log(user)
     current_password = ''
     fetch(URL + `/users/${id}`, {
       method: 'PATCH',
@@ -46,7 +44,6 @@ class MyInfo extends Component {
     if (!!localStorage.token) {
       if (this.props.user) {
         const cUser = this.props.user
-        // console.log(cUser)
         return (
           <div>
             <Segment placeholder>

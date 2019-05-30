@@ -1,7 +1,6 @@
 import React, {Component, Fragment} from 'react';
 import {connect} from 'react-redux';
 import {Button, Form, Grid, Segment} from 'semantic-ui-react';
-// import {Redirect, withRouter} from 'react-router-dom'
 import {URL, fetchingMembers, fetchingGroups} from '../redux/actionCreators';
 import FormField from './helper'
 
@@ -13,16 +12,7 @@ class NewMemberForm extends Component {
     this.setState({gender: d.value})
   }
 
-  // activeChange = (e, d) => {
-  //   this.setState({active: d.value})
-  // }
-  //
-  // welcomeChange = (e, d) => {
-  //   this.setState({welcome_mail: d.value})
-  // }
-
   handleClickRegister = (e, d) => {
-    // debugger
     let name = e.target.parentElement.name.value
     let email = e.target.parentElement.email.value
     let phone_number = e.target.parentElement.phoneNumber.value
@@ -36,7 +26,6 @@ class NewMemberForm extends Component {
     e.target.parentElement.dob.value = ""
     e.target.parentElement.info.value = ""
     this.setState({gender: ""})
-    // console.log(new_member)
     fetch(URL + '/members', {
       method: 'POST',
       headers: {
@@ -67,20 +56,15 @@ class NewMemberForm extends Component {
     let name = e.target.parentElement.name.value
     let email = e.target.parentElement.email.value
     let phone_number = e.target.parentElement.phoneNumber.value
-    // let gender = this.state.gender
-    // let dob = e.target.parentElement.dob.value
     let info = e.target.parentElement.info.value
     let group = this.state.groups
     let memberid = parseInt(window.location.pathname.split('/')[2])
-    // let update_member = {id: memberid, name: name, email: email, phone_number: phone_number, gender: gender, dob: dob, info: info, active: active, group: group, welcome_mail: welcome_mail}
     let update_member = {id: memberid, name: name, email: email, phone_number: phone_number, info: info, group: group}
     e.target.parentElement.name.value = ""
     e.target.parentElement.email.value = ""
     e.target.parentElement.phoneNumber.value = ""
-    // e.target.parentElement.dob.value = ""
     e.target.parentElement.info.value = ""
     this.setState({gender: ""})
-    // console.log(update_member)
     const token = localStorage.getItem('token')
     fetch(URL + `/members/${memberid}`, {
       method: 'PATCH',
@@ -99,13 +83,11 @@ class NewMemberForm extends Component {
   }
 
   handleResponseUpdate = json => {
-    // debugger
     if (json["success"]) {
       this.props.fetchingMembers()
       this.props.fetchingGroups()
       alert("Update success")
     } else {
-      // debugger
       alert("Wrong information. Please check and input again.")
     }
   }
@@ -126,7 +108,6 @@ class NewMemberForm extends Component {
     if (target === undefined) {
       target = {name: '', email: '', phone_number: '', gender: '', dob: '', info: '', active: '', welcome_mail: ''}
     }
-    // debugger
     return (
       <div>
         <Segment placeholder>

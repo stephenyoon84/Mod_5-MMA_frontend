@@ -10,10 +10,7 @@ class SmallGroupList extends Component {
   state = {}
 
   leaderOptions = () => {
-    // return this.props.groups.map(g => {
-    //   return {key: g.name, text: g.name, value: g.name}
     return this.props.users.filter(u => u.user_type === 'group_leader').map(l => {
-      // debugger
       return {key: l.name, text: l.name, value: l.name}
     })
   }
@@ -27,7 +24,6 @@ class SmallGroupList extends Component {
     let name = e.target.parentElement.name.value
     let token = localStorage.getItem('token')
     let group = {name: name, user_name: leader}
-    // console.log(leader, name)
     fetch(URL + '/groups', {
       method: "POST",
       headers: {

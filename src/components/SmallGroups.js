@@ -5,7 +5,6 @@ import {Grid} from 'semantic-ui-react';
 
 class SmallGroups extends Component {
   render() {
-    // debugger
     const thisYear = new Date().getFullYear()
     if (!localStorage.token){
       return <Redirect to='/' />

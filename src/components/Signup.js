@@ -10,7 +10,6 @@ class Signup extends Component {
   }
 
   handleSubmit = (e) => {
-    // debugger
     let name = e.target.name.value
     let email = e.target.email.value
     let phone_number = e.target.phoneNumber.value
@@ -47,8 +46,6 @@ class Signup extends Component {
   genderChange = (e, d) => {
     this.setState({gender: d.value})
   }
-
-  // params.require(:user).permit(:name, :email, :phone_number, :gender, :dob, :register_date, :active, :info, :user_type, :password, :password_confirmation)
 
   render() {
     if (!!localStorage.token){

@@ -7,7 +7,6 @@ import {URL, loginUser, fetchingMembers, fetchingGroups, fetchingUsers} from '..
 class Login extends Component {
   submitHandler = e => {
     e.preventDefault()
-    // console.log(e)
     let email = e.target.email.value
     let password = e.target.password.value
     fetch(URL + '/login', {

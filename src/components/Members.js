@@ -78,10 +78,8 @@ class Members extends Component {
                     <th>{member.phone_number}</th>
                     <th>{member.gender}</th>
                     <th>{member.dob}</th>
-                    {/*<th>{member.active ? "Yes" : "No"}</th>*/}
                     <th>{<Dropdown fluid options={activeOptions} defaultValue={member.active} onChange={e => this.activeChange(e, member)}/>}</th>
                     <th>{member.info}</th>
-                    {/*<th>{member.welcome_mail ? "Yes" : "Not yet"}</th>*/}
                     <th>{<Dropdown fluid  options={welcomeMailOptions} defaultValue={member.welcome_mail} onChange={e => this.welcomeChange(e, member)} />}</th>
                     <th><button data-member-id={member.id} onClick={(e)=>{
                     }}><Link to={`/newmember/${member.id}`}  >Edit</Link></button></th>
