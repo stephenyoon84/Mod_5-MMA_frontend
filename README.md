@@ -1,6 +1,6 @@
 Member Management App
 
-React Redux
+React Redux Thuk
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
